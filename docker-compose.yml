@@ -1,0 +1,40 @@
+version: "3.1"
+
+services:
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    ports:
+      - target: 5432
+        published: ${POSTGRES_PORT:-5432}
+        protocol: tcp
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-linkUp}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data:rw
+
+  backend:
+    build:
+      context: backend/
+    ports:
+      - "8000:3000"
+      - "5555:5555"
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend:/app/backend
+
+  frontend:
+    build:
+      context: frontend/
+    platform: linux/amd64
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app/frontend
+
+volumes:
+    postgres_data: {}
