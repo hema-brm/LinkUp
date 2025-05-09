@@ -5,7 +5,11 @@ import { PrismaService } from '../database/prisma/prisma.service';
 export class ChatService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async saveMessage(data: { content: string; username: string; color: string }) {
+  async saveMessage(data: {
+    content: string;
+    username: string;
+    color: string;
+  }) {
     return this.prisma.message.create({
       data: {
         content: data.content,

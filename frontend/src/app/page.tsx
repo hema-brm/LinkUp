@@ -16,8 +16,10 @@ import { useRouter } from "next/navigation";
 import { sendMessage } from "@/lib/socket";
 import { apiClient } from "@/config/axios";
 import { toast } from "sonner";
+import { useAxiosInterceptor } from "@/hooks/useAxiosInterceptor";
 
 export default function ChatPage() {
+  useAxiosInterceptor();
   const router = useRouter();
 
   const { currentUser, loading: loadingUser } = useCurrentUser();
@@ -90,7 +92,7 @@ export default function ChatPage() {
           connectedUsers={usersWithoutCurrentUser}
           disconnectedUsers={disconnectedUsers}
           onLogout={handleLogout}
-          totalUsers={allUsers.length}
+          totalUsers={allUsers.length - 1}
         />
       </div>
     </ProtectedRoute>

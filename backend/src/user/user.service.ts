@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../database/prisma/prisma.service';
 
 @Injectable()
@@ -11,7 +15,7 @@ export class UserService {
     });
 
     if (!user) {
-      throw new NotFoundException("Utilisateur non trouvé");
+      throw new NotFoundException('Utilisateur non trouvé');
     }
 
     return user;
@@ -35,6 +39,4 @@ export class UserService {
 
     return updatedUser;
   }
-
-
 }

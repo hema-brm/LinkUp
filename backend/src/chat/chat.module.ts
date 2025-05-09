@@ -7,11 +7,11 @@ import { PrismaModule } from 'src/database/prisma/prisma.module';
 import { UserModule } from 'src/user/user.module';
 
 @Module({
-    imports: [
-        JwtModule.register({ secret: process.env.JWT_SECRET }),
-        PrismaModule,
-        UserModule,
-      ],
+  imports: [
+    JwtModule.register({ secret: process.env.JWT_SECRET }),
+    PrismaModule,
+    UserModule,
+  ],
   controllers: [ChatController],
   providers: [ChatGateway, ChatService],
 })

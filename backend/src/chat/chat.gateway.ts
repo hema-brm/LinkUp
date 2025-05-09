@@ -27,7 +27,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   constructor(
     private jwtService: JwtService,
     private chatService: ChatService,
-    private userService: UserService
+    private userService: UserService,
   ) {}
 
   handleConnection(client: Socket) {
@@ -36,19 +36,17 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     try {
       const payload = this.jwtService.verify(token);
       const username = payload?.username;
-      
+
       if (!username) {
-        console.warn("Connexion refusée : username manquant");
+        console.warn('Connexion refusée : username manquant');
         return client.disconnect();
       }
 
       client.data.user = payload;
       this.connectedUsers.add(username);
- 
+
       this.server.emit('connected_users', Array.from(this.connectedUsers));
       client.broadcast.emit('user_connected', username);
-
-      console.log(`Client connecté : ${username}`);
     } catch {
       console.warn('Connexion refusée (JWT invalide)');
       client.disconnect();

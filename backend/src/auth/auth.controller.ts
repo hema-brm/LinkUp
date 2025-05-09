@@ -12,7 +12,8 @@ import { UserService } from 'src/user/user.service';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly userService: UserService) {}
+    private readonly userService: UserService,
+  ) {}
 
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
@@ -32,7 +33,7 @@ export class AuthController {
   @Get('me')
   async getMe(@CurrentUser() payload: JwtPayload) {
     const user = await this.userService.findById(payload.userId);
-    
+
     return {
       userId: user.id,
       username: user.username,

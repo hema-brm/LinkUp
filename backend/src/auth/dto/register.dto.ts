@@ -1,12 +1,7 @@
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  MinLength,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class RegisterDto {
-  @IsNotEmpty({ message: 'Le nom d\'utilisateur ne peut pas être vide.' })
+  @IsNotEmpty({ message: "Le nom d'utilisateur ne peut pas être vide." })
   username: string;
 
   @IsNotEmpty({ message: "L'email ne peut pas être vide." })

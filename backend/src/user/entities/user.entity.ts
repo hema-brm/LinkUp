@@ -1,18 +1,18 @@
-import { Exclude, Expose } from "class-transformer";
+import { Exclude, Expose } from 'class-transformer';
 
 export class UserEntity {
-    @Expose()
-    id: string;
+  @Expose()
+  id: string;
 
-    @Expose()
-    username: string;
+  @Expose()
+  username: string;
 
-    @Expose()
-    email: string;
+  @Expose()
+  email: string;
 
-    @Exclude()
-    password: string;
+  @Exclude()
+  password: string;
 
-    @Expose()
-    color: string;
+  @Expose()
+  color: string;
 }

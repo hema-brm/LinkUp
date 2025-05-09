@@ -7,15 +7,18 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 @Controller('users')
 @UseGuards(JwtAuthGuard)
 export class UserController {
-    constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
-    @Get()
-    async findAll() {
-      return this.userService.findAll();
-    }
+  @Get()
+  async findAll() {
+    return this.userService.findAll();
+  }
 
-    @Patch('color')
-    updateColor(@CurrentUser() user: JwtPayload, @Body() { color }: { color: string }) {
-        return this.userService.updateColor(user.userId, color);
-    }
+  @Patch('color')
+  updateColor(
+    @CurrentUser() user: JwtPayload,
+    @Body() { color }: { color: string },
+  ) {
+    return this.userService.updateColor(user.userId, color);
+  }
 }
